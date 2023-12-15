@@ -1,16 +1,16 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
-require('./drivers/connect-db')
+require('./drivers/connect-db');
 
-const app = express()
+const app = express();
 
-app.set('PORT', process.env.PORT || 3000)
+app.set('PORT', process.env.PORT || 3000);
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
-app.use('/band', require('./routes/band'))
-app.use('/member', require('./routes/member'))
+app.use('/doghouse', require('./routes/doghouse'));
+app.use('/dog', require('./routes/dog'));
 
-app.listen(app.get('PORT'), ()=>console.log(`Server listen at port ${app.get('PORT')}`))
+app.listen(app.get('PORT'), () => console.log(`Server listen at port ${app.get('PORT')}`));
