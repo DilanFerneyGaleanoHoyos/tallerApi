@@ -5,7 +5,7 @@ const Dog = require('../models/model-dogs');
 module.exports = {
     findAll: async (req, res) => {
         try {
-            const data = await Doghouse.find({}).populate('residents');
+            const data = await Doghouse.find({}).populate('dogs');
             return res.status(200).json({ "state": true, "data": data });
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error });
@@ -15,7 +15,7 @@ module.exports = {
     findByObjectId: async (req, res) => {
         const { id } = req.params;
         try {
-            const data = await Doghouse.findById(id).populate('residents');
+            const data = await Doghouse.findById(id).populate('dogs');
             return res.status(200).json({ "state": true, "data": data });
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error });
@@ -24,7 +24,7 @@ module.exports = {
     findById: async (req, res) => {
         const { id } = req.params;
         try {
-            const data = await Doghouse.find({ id: id }).populate('residents');
+            const data = await Doghouse.find({ id: id }).populate('dogs');
             return res.status(200).json({ "state": true, "data": data });
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error });
