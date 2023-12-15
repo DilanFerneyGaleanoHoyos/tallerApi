@@ -7,12 +7,12 @@ const {
     save,
     update,
     remove
-} = require('../controllers/bands')
+}= require('../controllers/dogs');
 
 routes.get("/", findAll)
 routes.get("/:id", findByObjectId)
 routes.get("/id/:id", findById)
-routes.post("/", save)
+routes.post("/:id", save)
 routes.put("/:id", update)
 routes.delete("/:id", remove)
 
