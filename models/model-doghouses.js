@@ -17,7 +17,7 @@ const DoghouseSchema = new Schema({
         type: String,
         required: true
     },
-    residents: [{
+    dogs: [{
         type: mongoose.Types.ObjectId,
         ref: 'dogs'
     }]
