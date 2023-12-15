@@ -21,7 +21,7 @@ const DogSchema = new Schema({
         type: Number,
         required: true
     },
-    doghouse: {
+    doghouses: {
         type: mongoose.Types.ObjectId,
         ref: 'doghouses'
     }
