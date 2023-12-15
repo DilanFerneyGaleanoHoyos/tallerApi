@@ -23,9 +23,9 @@ const DogSchema = new Schema({
     },
     doghouse: {
         type: mongoose.Types.ObjectId,
-        ref: 'doghouse'
+        ref: 'doghouses'
     }
 }, {
     versionKey: false
 });
-module.exports = mongoose.model('dog', DogSchema);
+module.exports = mongoose.model('dogs', DogSchema);

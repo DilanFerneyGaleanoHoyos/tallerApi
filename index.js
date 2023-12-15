@@ -10,7 +10,7 @@ app.set('PORT', process.env.PORT || 3000);
 app.use(express.json());
 app.use(cors());
 
-app.use('/doghouse', require('./routes/doghouse'));
-app.use('/dog', require('./routes/dog'));
+app.use('/doghouses', require('./routes/doghouses'));
+app.use('/dogs', require('./routes/dogs'));
 
 app.listen(app.get('PORT'), () => console.log(`Server listen at port ${app.get('PORT')}`));

@@ -1,6 +1,6 @@
 // doghouse.js
-const Doghouse = require('../models/model-doghouse');
-const Dog = require('../models/model-dog');
+const Doghouse = require('../models/model-doghouses');
+const Dog = require('../models/model-dogs');
 
 module.exports = {
     findAll: async (req, res) => {

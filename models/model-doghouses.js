@@ -19,10 +19,10 @@ const DoghouseSchema = new Schema({
     },
     residents: [{
         type: mongoose.Types.ObjectId,
-        ref: 'dog'
+        ref: 'dogs'
     }]
 }, {
     versionKey: false
 });
 
-module.exports = mongoose.model('doghouse', DoghouseSchema);
+module.exports = mongoose.model('doghouses', DoghouseSchema);
