@@ -1,4 +1,6 @@
-const express = require('express');
+
+//index.jso
+ express = require('express');
 const cors = require('cors');
 
 require('./drivers/connect-db');

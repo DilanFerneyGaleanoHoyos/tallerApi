@@ -34,28 +34,28 @@ module.exports = {
 
     save: async (req, res) => {
         const { id } = req.params;
-
+    
         try {
-            const doghouse = await Doghouse.findById(id);
-
-            if (doghouse) {
+            const doghouses = await doghouses.findById(id)
+    
+            if (dogs) {
                 try {
-                    const dog = new Dog(req.body);
-                    dog.doghouse = doghouse;
-                    const result = await dog.save();
-                    doghouseObject = doghouse.toObject();
-                    doghouseObject.residents.push(dog);
-                    await doghouse.updateOne(doghouseObject);
-                    return res.status(200).json({ "status": true, "data": result });
+                    const dogs = new Dogs(req.body)
+                    dogs.dogs = dogs
+                    const result = await dogs.save()
+                    dogsObject = dogs.toObject()
+                    dogsObject.dogs.push(dogs)
+                    await dogs.updateOne(dogsObject)
+                    return res.status(200).json({ "status": true, "data": result })
                 } catch (error) {
-                    console.log(error);
-                    return res.status(500).json({ "status": false, "error": error });
+                    console.log(error)
+                    return res.status(500).json({ "status": false, "error": error })
                 }
             } else {
-                return res.status(404).json({ "status": false, "error": "La Casa de Perros No Existe" });
+                return res.status(404).json({ "status": false, "error": "La casa No Existe" })
             }
         } catch (error) {
-            return res.status(500).json({ "status": false, "error": "El id está incompleto" });
+            return res.status(500).json({ "status": false, "error": "El id esta incompleto" })
         }
     },
 
