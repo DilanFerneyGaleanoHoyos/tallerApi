@@ -32,9 +32,10 @@ module.exports = {
     }
   },
 
-  save: async (req, res) => {try {
+  save: async (req, res) => {
+    try {
         const dogHouseId = req.body.doghouses; // Assuming 'doghouses' is provided in the request body
-        const dogHouse = await Doghouses.findById(dogHouseId); // Utilizando el modelo Doghouses
+        const dogHouse = await doghouse.findById(dogHouseId); // Utilizando el modelo Doghouse
 
         if (dogHouse) {
             try {
@@ -52,12 +53,13 @@ module.exports = {
                 return res.status(500).json({ "status": false, "error": error });
             }
         } else {
-            return res.status(404).json({ "status": false, "error": "La casa para perros no existe" });
+            return res.status(404).json({ "status": false, "error": "La casa para perros no existe pweeo" });
         }
     } catch (error) {
-        return res.status(500).json({ "status": false, "error": "El id está incompleto" });
+        return res.status(500).json({ "status": false, "error": "El id está incompleto perro" });
     }
 },
+
 
   update: async (req, res) => {
     const { id } = req.params;
