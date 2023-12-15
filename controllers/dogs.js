@@ -1,3 +1,4 @@
+// dogs.js
 const Dog = require('../models/model-dogs');
 const Doghouse = require('../models/model-doghouses');
 
@@ -13,87 +14,41 @@ module.exports = {
 
   findByObjectId: async (req, res) => {
     const { id } = req.params;
-
-    // Verificamos que el id es válido
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        "status": false,
-        "error": "Id inválido"
-      });
+    try {
+      const data = await Dog.findById(id);
+      return res.status(200).json({ "state": true, "data": data });
+    } catch (error) {
+      return res.status(500).json({ "state": false, "error": error });
     }
-
-    // Usamos la función `findOne()`
-    const doghouse = await Doghouse.findOne({ id: id });
-
-    if (!doghouse) {
-      return res.status(404).json({
-        "status": false,
-        "error": "La casa de perro no existe"
-      });
-    }
-
-    return res.status(200).json({ "status": true, "data": doghouse });
   },
 
   findById: async (req, res) => {
     const { id } = req.params;
-
-    // Verificamos que el id es válido
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({
-        "status": false,
-        "error": "Id inválido"
-      });
-    }
-
-    // Manejamos el error de casteo
     try {
-      const doghouse = await Doghouse.findById(id);
+      const data = await Dog.find({ id: id });
+      return res.status(200).json({ "state": true, "data": data });
     } catch (error) {
-      return res.status(400).json({
-        "status": false,
-        "error": "Id inválido"
-      });
+      return res.status(500).json({ "state": false, "error": error });
     }
-
-    if (!doghouse) {
-      return res.status(404).json({
-        "status": false,
-        "error": "La casa de perro no existe"
-      });
-    }
-
-    return res.status(200).json({ "status": true, "data": doghouse });
   },
 
   save: async (req, res) => {
     const { id } = req.params;
 
-    // Buscamos la casa de perro
-    const doghouse = await Doghouse.findById(id);
+    try {
+      const doghouses = await Doghouse.findById(id);
 
-    if (!doghouse) {
-      return res.status(404).json({
-        "status": false,
-        "error": "La casa de perro no existe"
-      });
+      if (doghouses) {
+        const dog = new Dog(req.body);
+        dog.doghouses = doghouses;
+        const result = await dog.save();
+        return res.status(200).json({ "status": true, "data": result });
+      } else {
+        return res.status(404).json({ "status": false, "error": "La casa No Existe" });
+      }
+    } catch (error) {
+      return res.status(500).json({ "status": false, "error": error });
     }
-
-    // Creamos el nuevo perro
-    const dog = new Dog(req.body);
-
-    // Asignamos la casa de perro al perro
-    dog.doghouses = doghouse.id;
-
-    // Guardamos el perro
-    const savedDog = await dog.save();
-
-    // Actualizamos la lista de residentes de la casa de perro
-    doghouse.residents.push(savedDog.id);
-    await doghouse.save();
-
-    // Devolvemos la información del perro guardado
-    return res.status(200).json({ "status": true, "data": savedDog });
   },
 
   update: async (req, res) => {
@@ -105,7 +60,6 @@ module.exports = {
       return res.status(500).json({ "state": false, "error": error });
     }
   },
-
 
   remove: async (req, res) => {
     const { id } = req.params;
