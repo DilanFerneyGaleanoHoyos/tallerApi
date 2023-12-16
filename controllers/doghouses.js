@@ -5,7 +5,7 @@ const Member = require('../models/model-dogs');
 module.exports = {
     findAll: async (req, res) => {
         try {
-            const data = await Band.find({}).populate('members')
+            const data = await Band.find({}).populate('dogs')
             return res.status(200).json({ "state": true, "data": data })
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error })
@@ -15,7 +15,7 @@ module.exports = {
     findByObjectId: async (req, res) => {
         const { id } = req.params
         try {
-            const data = await Band.findById(id).populate('members')
+            const data = await Band.findById(id).populate('dogs')
             return res.status(200).json({ "state": true, "data": data })
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error })
@@ -27,7 +27,7 @@ module.exports = {
     findById: async (req, res) => {
         const { id } = req.params
         try {
-            const data = await Band.find({ id: id }).populate('members')
+            const data = await Band.find({ id: id }).populate('dogs')
             return res.status(200).json({ "state": true, "data": data })
         } catch (error) {
             return res.status(500).json({ "state": false, "error": error })
